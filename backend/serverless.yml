@@ -1,0 +1,49 @@
+service: foo-serverless-backend
+
+frameworkVersion: "2.52.1"
+
+custom:
+  prod:
+    Stack: foo-serverless
+    LogLevel: info
+  dev:
+    Stack: foo-serverless
+    LogLevel: debug
+    
+provider:
+  name: aws
+  runtime: nodejs12.x
+  memorySize: 128
+  timeout: 10
+  region: ${env:foo_AWS_REGION}
+  stage: ${opt:stage, 'dev'}
+  logRetentionInDays: 14
+  environment:
+    logLevel: ${self:custom.${self:provider.stage}.LogLevel}
+    
+package:
+  individually: true
+  
+resources:
+  - ${file(resources/apigateway/RestApi.yml)}
+  - ${file(resources/dynamodb/TableA.yml)}
+  - ${file(resources/dynamodb/TableB.yml)}
+  - Outputs:
+      ApiGWRestApiId:
+        Value:
+          Ref: ApiGatewayRestApi
+        Export:
+          Name: ${self:custom.${self:provider.stage}.Stack}-restApiId-${self:provider.stage}
+      ApiGWRootResourceId:
+        Value:
+          Fn::GetAtt:
+            - ApiGatewayRestApi
+            - RootResourceId
+        Export:
+          Name: ${self:custom.${self:provider.stage}.Stack}-rootResourceId-${self:provider.stage}
+          
+plugins:
+  - serverless-dotenv-plugin
+  - serverless-iam-roles-per-function
+  - serverless-plugin-reducer
+  - serverless-offline

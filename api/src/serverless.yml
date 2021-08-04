@@ -1,0 +1,99 @@
+service: foo-serverless-api
+
+frameworkVersion: "2.52.1"
+
+custom:
+  prod:
+    Stack: foo-serverless
+    LogLevel: info
+  dev:
+    Stack: foo-serverless
+    LogLevel: debug
+  serverless-offline:
+    httpPort: 3003
+    websocketPort: 3004
+    lambdaPort: 3005
+
+package:
+  individually: true
+  exclude:
+    - api1
+    - api2
+    # implicitly include common in all packages
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  memorySize: 128
+  timeout: 10
+  region: ${env:FOO_AWS_REGION}
+  stage: ${opt:stage, 'dev'}
+  apiGateway:
+    restApiId:
+      'Fn::ImportValue': ${self:custom.${self:provider.stage}.Stack}-restApiId-${self:provider.stage}
+    restApiRootResourceId:
+      'Fn::ImportValue': ${self:custom.${self:provider.stage}.Stack}-rootResourceId-${self:provider.stage}
+  logRetentionInDays: 14
+  environment:
+    logLevel: ${self:custom.${self:provider.stage}.LogLevel}
+
+functions:
+  api1:
+    handler: api1/index.handler
+    package:
+      include:
+        - api1 
+    iamRoleStatementsName: ${self:custom.${self:provider.stage}.Stack}-api1-${self:provider.stage}-lambda-role
+    iamRoleStatements:
+      # Allow access to DynamoDB tables 
+      - Effect: Allow 
+        Action:
+          - dynamodb:Scan
+          - dynamodb:Query
+          - dynamodb:GetItem
+          - dynamodb:PutItem
+          - dynamodb:UpdateItem
+        Resource:
+          - arn:aws:dynamodb:${aws:region}:${aws:accountId}:table/${self:custom.${self:provider.stage}.Stack}-table-a-${self:provider.stage}
+      # Allow access to SES
+      - Effect: Allow 
+        Action:
+          - ses:*
+        Resource: '*'
+    events:
+      - http:
+          path: /api1
+          method: post
+          cors: true
+    environment:
+      FOO_DYNAMODB_TABLE_A: ${self:custom.${self:provider.stage}.Stack}-table-a-${self:provider.stage}
+  api2:
+    handler: api2/index.handler
+    package:
+      include:
+        - api2 
+    iamRoleStatementsName: ${self:custom.${self:provider.stage}.Stack}-api2-${self:provider.stage}-lambda-role
+    iamRoleStatements:
+      # Allow access to DynamoDB tables
+      - Effect: Allow 
+        Action:
+          - dynamodb:Scan
+          - dynamodb:Query
+          - dynamodb:GetItem
+          - dynamodb:PutItem
+          - dynamodb:UpdateItem
+        Resource:
+          - arn:aws:dynamodb:${aws:region}:${aws:accountId}:table/${self:custom.${self:provider.stage}.Stack}-table-b-${self:provider.stage}
+    events:
+      - http:
+          path: /api2
+          method: post
+          cors: true
+    environment:
+      FOO_DYNAMODB_TABLE_B: ${self:custom.${self:provider.stage}.Stack}-table-b-${self:provider.stage}
+
+plugins:
+  - serverless-dotenv-plugin
+  - serverless-iam-roles-per-function
+  - serverless-plugin-reducer
+  - serverless-offline

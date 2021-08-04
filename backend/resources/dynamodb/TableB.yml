@@ -1,0 +1,14 @@
+Resources:
+  TableB:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: ${self:custom.${self:provider.stage}.Stack}-table-b-${self:provider.stage}
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: "id"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "id"
+          KeyType: "HASH"
+      StreamSpecification:
+        StreamViewType: "NEW_IMAGE"
