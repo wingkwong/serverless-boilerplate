@@ -1,5 +1,7 @@
 # serverless-boilerplate
-Serverless Boilerplate
+Serverless Boilerplate (APIGW + DynamoDB + Lambda)
+
+![image](https://user-images.githubusercontent.com/35857179/128360478-c3496b52-c9ca-4889-b67c-e4359bfb1cd1.png)
 
 ## Installing
 
