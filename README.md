@@ -39,14 +39,6 @@ sls deploy --stage='dev'
 
 ![image](https://user-images.githubusercontent.com/35857179/128448918-a4860889-f8be-4d16-aa81-27cce2b651c6.png)
 
-
-## Remove backend resources (API Gateway + DynamoDB) 
-
-```
-cd ./backend
-sls remove --stage='dev'
-```
-
 ## Build API
 
 ```
@@ -62,13 +54,6 @@ sls deploy --stage='dev'
 ```
 
 ![image](https://user-images.githubusercontent.com/35857179/128450844-91c800c9-614b-4880-a84f-2ad87410ab3a.png)
-
-## Remove API 
-
-```
-cd api/src
-sls remove --stage='dev'
-```
 
 ## Testing API
 
@@ -89,3 +74,18 @@ Response
 
 ![image](https://user-images.githubusercontent.com/35857179/128451231-4cd1c015-d888-4fe9-ac88-b643dcf6149c.png)
 
+## Clean up
+
+### Remove API 
+
+```
+cd api/src
+sls remove --stage='dev'
+```
+
+### Remove backend resources (API Gateway + DynamoDB) 
+
+```
+cd ./backend
+sls remove --stage='dev'
+```
