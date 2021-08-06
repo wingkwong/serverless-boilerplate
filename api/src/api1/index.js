@@ -70,6 +70,7 @@ app.post('/api1', async (req, res) => {
             .put(params)
             .promise()
             .then(() => {
+                const sender = process.env.FOO_SENDER || "foo@example.com"
                 const recipients = [
                     "foo@example.com",
                     "bar@example.com"
