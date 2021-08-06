@@ -6,8 +6,16 @@ Serverless Boilerplate (APIGW + DynamoDB + Lambda)
 ## To-be-provisioned resources
 
 - 1 API Gateway
-- 1 DynamoDB with 2 Tables (Table_A & Table_B)
+
+  ![image](https://user-images.githubusercontent.com/35857179/128449981-b6ae18f4-58b3-4226-a2da-2761a1b2aaed.png)
+
+- 1 DynamoDB with 2 Tables
+  
+  ![image](https://user-images.githubusercontent.com/35857179/128450008-80ee18d8-ff27-4a9e-a105-6af8a2525cea.png)
+
 - 2 Lambda functions
+
+  ![image](https://user-images.githubusercontent.com/35857179/128450790-46b480c5-8968-442f-88d0-d89584c4cc29.png)
 
 ## Install
 
@@ -53,6 +61,8 @@ cd api/src
 sls deploy --stage='dev'
 ```
 
+![image](https://user-images.githubusercontent.com/35857179/128450844-91c800c9-614b-4880-a84f-2ad87410ab3a.png)
+
 ## Remove API 
 
 ```
@@ -74,3 +84,8 @@ Request Body
     "field2": "bar"
 }
 ```
+
+Response
+
+![image](https://user-images.githubusercontent.com/35857179/128451231-4cd1c015-d888-4fe9-ac88-b643dcf6149c.png)
+
