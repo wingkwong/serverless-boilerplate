@@ -3,6 +3,14 @@ Serverless Boilerplate (APIGW + DynamoDB + Lambda)
 
 ![image](https://user-images.githubusercontent.com/35857179/128360478-c3496b52-c9ca-4889-b67c-e4359bfb1cd1.png)
 
+## Features
+
+- Common packages for all APIs
+- Define IAM roles pre function
+- Package only dependencies it requires 
+- Preload environment variables into Serverless
+- Separate backend resources and APIs
+
 ## To-be-provisioned resources
 
 - 1 API Gateway
