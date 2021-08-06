@@ -3,17 +3,23 @@ Serverless Boilerplate (APIGW + DynamoDB + Lambda)
 
 ![image](https://user-images.githubusercontent.com/35857179/128360478-c3496b52-c9ca-4889-b67c-e4359bfb1cd1.png)
 
-## Installing
+## To-be-provisioned resources
+
+- 1 API Gateway
+- 1 DynamoDB with 2 Tables (Table_A & Table_B)
+- 2 Lambda functions
+
+## Install
 
 ```
-npm install serverless -g
+npm i serverless -g
 ```
 
 ## Build backend resources (API Gateway + DynamoDB)
 
 ```
 cd ./backend
-yarn install
+npm i
 ```
 
 ## Deploy backend resources (API Gateway + DynamoDB)
@@ -22,6 +28,9 @@ yarn install
 cd ./backend
 sls deploy --stage='dev'
 ```
+
+![image](https://user-images.githubusercontent.com/35857179/128448918-a4860889-f8be-4d16-aa81-27cce2b651c6.png)
+
 
 ## Remove backend resources (API Gateway + DynamoDB) 
 
@@ -34,7 +43,7 @@ sls remove --stage='dev'
 
 ```
 cd api/src
-yarn install
+npm i
 ```
 
 ## Deploy API
