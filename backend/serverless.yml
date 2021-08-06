@@ -1,6 +1,6 @@
 service: foo-serverless-backend
 
-frameworkVersion: "2.52.1"
+frameworkVersion: ">=2.52.1"
 
 custom:
   prod:
