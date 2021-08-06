@@ -15,7 +15,7 @@ provider:
   runtime: nodejs12.x
   memorySize: 128
   timeout: 10
-  region: ${env:foo_AWS_REGION}
+  region: ${env:foo_AWS_REGION, 'ap-southeast-1'}
   stage: ${opt:stage, 'dev'}
   logRetentionInDays: 14
   environment:
