@@ -48,6 +48,8 @@ npm i
 
 ## Deploy API
 
+There are two Lambda functions. Both will take the input fields (field1 and field2) and write to DynamoDB. The only difference is that api1 is integrated with SES and will send emails to notify specfic users. See [here](https://github.com/wingkwong/serverless-boilerplate/blob/master/api/src/api1/index.js#L72) for more.
+
 ```
 cd api/src
 sls deploy --stage='dev'
@@ -55,7 +57,9 @@ sls deploy --stage='dev'
 
 ![image](https://user-images.githubusercontent.com/35857179/128450844-91c800c9-614b-4880-a84f-2ad87410ab3a.png)
 
-## Testing API
+## Test API
+
+> If you test api1, make sure your sender has been verified.
 
 Headers
 ```
