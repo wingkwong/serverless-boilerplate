@@ -1,10 +1,8 @@
 'use strict';
 
-require('dotenv').config()
-
 const AWS = require('aws-sdk');
 const ses = new AWS.SES({
-    region: 'ap-southeast-1'
+    region: 'ap-southeast-1' || process.env.AWS_REGION
 });
 
 module.exports.sendEmail = async function sendEmail(sender, recipients, subject, body) {

@@ -69,6 +69,7 @@ functions:
           cors: true
     environment:
       FOO_DYNAMODB_TABLE_A: ${self:custom.${self:provider.stage}.Stack}-table-a-${self:provider.stage}
+      FOO_SENDER: "foo@example.com"
   api2:
     handler: api2/index.handler
     package:

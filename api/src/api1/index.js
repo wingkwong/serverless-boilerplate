@@ -70,10 +70,11 @@ app.post('/api1', async (req, res) => {
             .put(params)
             .promise()
             .then(() => {
+                // exported from serverless.yml
                 const sender = process.env.FOO_SENDER || "foo@example.com"
                 const recipients = [
-                    "foo@example.com",
-                    "bar@example.com"
+                    "bar@example.com",
+                    "baz@example.com"
                 ]
                 const subject = "Subject"
                 const body = "Body"
