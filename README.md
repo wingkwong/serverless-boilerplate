@@ -24,6 +24,13 @@ Serverless Boilerplate (APIGW + DynamoDB + Lambda)
 - 2 Lambda functions
 
   ![image](https://user-images.githubusercontent.com/35857179/128450790-46b480c5-8968-442f-88d0-d89584c4cc29.png)
+  
+
+## Customize this boilerplate
+
+- By default, this boilerplate uses ``foo`` and ``FOO`` as application name.
+
+- By default, the fallback region is ``ap-southeast-1`` if you don't specify in ``.env``. 
 
 ## Install
 
