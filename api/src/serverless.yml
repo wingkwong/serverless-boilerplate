@@ -2,6 +2,8 @@ service: foo-serverless-api
 
 frameworkVersion: ">=2.52.1"
 
+useDotenv: true
+
 custom:
   prod:
     Stack: foo-serverless
@@ -93,7 +95,6 @@ functions:
       FOO_DYNAMODB_TABLE_B: ${self:custom.${self:provider.stage}.Stack}-table-b-${self:provider.stage}
 
 plugins:
-  - serverless-dotenv-plugin
   - serverless-iam-roles-per-function
   - serverless-plugin-reducer
   - serverless-offline

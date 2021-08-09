@@ -2,6 +2,8 @@ service: foo-serverless-backend
 
 frameworkVersion: ">=2.52.1"
 
+useDotenv: true
+
 custom:
   prod:
     Stack: foo-serverless
@@ -43,7 +45,6 @@ resources:
           Name: ${self:custom.${self:provider.stage}.Stack}-rootResourceId-${self:provider.stage}
           
 plugins:
-  - serverless-dotenv-plugin
   - serverless-iam-roles-per-function
   - serverless-plugin-reducer
   - serverless-offline
